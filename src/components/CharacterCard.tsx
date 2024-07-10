@@ -10,13 +10,14 @@ const CharacterCard = ({ character }: Props) => {
   const { id, name, status, gender, species, location, image, origin } =
     character;
   const [searchParams] = useSearchParams();
-  const page = searchParams.get("page") || 1;
+  const page = searchParams.get("page");
+  const nameQuery = searchParams.get("name");
 
   return (
     <Link
       className='character-link'
       to={`/character/${id}`}
-      state={{ page }}
+      state={{ page, name: nameQuery }}
       key={character.id}
     >
       <article className='character-card'>

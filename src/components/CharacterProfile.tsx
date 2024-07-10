@@ -9,7 +9,8 @@ export const CharacterProfile: React.FC = () => {
   const [character, setCharacter] = useState<Character | null>(null);
 
   const location = useLocation();
-  const page = location.state?.page || 1;
+  const page = location.state?.page;
+  const name = location.state?.name;
 
   useEffect(() => {
     const loadCharacter = async () => {
@@ -24,13 +25,24 @@ export const CharacterProfile: React.FC = () => {
     loadCharacter();
   }, [id]);
 
+  const searchParams = new URLSearchParams(
+    Object.entries({ page, name })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .filter(([_, value]) => value !== null && value !== "")
+      .map(([key, value]) => [key, key === "name" ? value.trim() : value])
+  );
+
+  const finalSearchParams = searchParams.toString()
+    ? `?${searchParams.toString()}`
+    : "";
+
   if (!character) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className='character-profile-container'>
-      <Link className='go-back-button' to={`/?page=${page}`}>
+      <Link className='go-back-button' to={`/${finalSearchParams}`}>
         Back to all characters
       </Link>
       <h1>{character.name}</h1>
