@@ -3,17 +3,12 @@ import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "../hooks/useHooks";
 import "./SearchBar.css";
 
-interface Props {
-  onSearch: (query: string) => void;
-}
-
-const SearchBar = ({ onSearch }: Props) => {
-  console.log(onSearch, "onSearch");
+const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialQuery = searchParams.get("name") || "";
 
   const [query, setQuery] = useState(initialQuery);
-  const [debouncedQuery] = useDebounce(query, 300); // 300ms delay
+  const [debouncedQuery] = useDebounce(query, 300);
 
   useEffect(() => {
     const trimmedQuery = debouncedQuery.trim();
