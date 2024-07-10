@@ -9,8 +9,7 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ info, currentPage }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams, "searchParams");
+  const [_, setSearchParams] = useSearchParams();
 
   const getPageFromUrl = (url: string | null): number => {
     if (!url) return currentPage;
@@ -18,7 +17,7 @@ const Pagination: React.FC<PaginationProps> = ({ info, currentPage }) => {
     return Number(parsedUrl.searchParams.get("page")) || currentPage;
   };
 
-  if (!info) return null;
+  if (!info || info?.count <= 1) return null;
 
   const nextPage = getPageFromUrl(info.next);
   const prevPage = getPageFromUrl(info.prev);

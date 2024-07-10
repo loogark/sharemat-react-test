@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ApiResponse, Character } from "../../types";
-import { fetchData } from "../../utils/api";
+import { useFetch } from "../useFetch";
 
 interface UseCharactersResult {
   characters: Character[] | null;
@@ -16,8 +16,7 @@ export const UseCharacters = (): UseCharactersResult => {
   const [info, setInfo] = useState<ApiResponse<Character[]>["info"] | null>(
     null
   );
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
+  const { fetchData, isLoading, error } = useFetch<Character[]>();
 
   const [searchParams] = useSearchParams();
 
@@ -26,8 +25,6 @@ export const UseCharacters = (): UseCharactersResult => {
 
   useEffect(() => {
     const fetchCharacterData = async (pageNumber: number) => {
-      setIsLoading(true);
-      setError(null);
       try {
         const params: { page: number; name?: string } = { page: pageNumber };
 
@@ -35,24 +32,16 @@ export const UseCharacters = (): UseCharactersResult => {
           params.name = currentSearch;
         }
 
-        const characterData = await fetchData<Character>("character", params);
+        const characterData = await fetchData("character", params);
         setCharacters(characterData.results);
         setInfo(characterData.info);
       } catch (error) {
-        setIsLoading(false);
         console.error("Error fetching character data:", error);
-        setError(
-          error instanceof Error
-            ? error
-            : new Error("An unknown error occurred")
-        );
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchCharacterData(currentPage);
-  }, [currentPage, currentSearch]);
+  }, [currentPage, currentSearch, fetchData]);
 
   return { characters, info, isLoading, error, currentPage };
 };

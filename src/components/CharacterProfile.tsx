@@ -5,6 +5,7 @@ import "./CharacterProfile.css";
 
 export const CharacterProfile: React.FC = () => {
   const { character, isLoading, backLinkParams } = useCharacterProfile();
+  console.log(character, "character");
 
   if (isLoading) return <div>Loading...</div>;
 

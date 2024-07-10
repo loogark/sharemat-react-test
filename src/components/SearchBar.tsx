@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useDebounce } from "../hooks/useHooks";
+import { useDebounce } from "../hooks/useDebounce";
 import "./SearchBar.css";
 
 const SearchBar = () => {
