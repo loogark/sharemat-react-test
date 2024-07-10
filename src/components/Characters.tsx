@@ -1,36 +1,48 @@
 import { useEffect, useState } from "react";
-import { Character } from "../types";
+import { useLocation } from "react-router-dom";
+import { ApiResponse, Character } from "../types";
 import { fetchData } from "../utils/api";
 import CharacterCard from "./CharacterCard";
 import "./Characters.css";
+import Pagination from "./Pagination";
 
 export const Characters = () => {
   const [characters, setCharacters] = useState<Character[] | null>(null);
+  const [info, setInfo] = useState<ApiResponse<Character[]>["info"] | null>(
+    null
+  );
+  const location = useLocation();
 
-  const fetchCharacterData = async () => {
+  const currentPage =
+    Number(new URLSearchParams(location.search).get("page")) || 1;
+
+  const fetchCharacterData = async (pageNumber: number) => {
+    console.log(pageNumber);
     try {
       const characterData = await fetchData<Character>("character", {
-        page: 1,
-        name: "rick",
-        status: "alive",
+        page: pageNumber,
       });
       setCharacters(characterData.results);
+      setInfo(characterData.info);
     } catch (error) {
       console.error("Error fetching character data:", error);
     }
   };
 
   useEffect(() => {
-    fetchCharacterData();
-  }, []);
+    fetchCharacterData(currentPage);
+  }, [currentPage]);
 
   console.log(characters, "characters");
 
   return (
-    <div className='character-grid'>
-      {characters?.map((character) => {
-        return <CharacterCard key={character?.id} character={character} />;
-      })}
+    <div>
+      <div className='character-grid'>
+        {characters?.map((character) => {
+          return <CharacterCard key={character?.id} character={character} />;
+        })}
+      </div>
+      <Pagination info={info} currentPage={currentPage} />
     </div>
   );
 };

@@ -4,28 +4,64 @@
     gap: 4px;
     padding: 20px;
     margin-bottom: 20px;
+    justify-items: center;
 }
 
-@media (max-width: 600px) {
-    .character-grid {
-        grid-template-columns: 1fr;
-    }
-}
+@media screen and (max-width: 600px) {}
 
-@media (min-width: 601px) and (max-width: 900px) {
+@media only screen and (min-width: 600px) and (max-width: 768px) {
     .character-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (min-width: 901px) and (max-width: 1200px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .character-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+    .character-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Large desktops */
+@media only screen and (min-width: 1200px) {
+    .character-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+/* From 320px and up */
+@media screen and (min-width: 320px) {
+    .character-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .character-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1024px) {
     .character-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media (min-width: 1201px) {
+@media screen and (min-width: 1224px) {
     .character-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1824px) {
+    .character-grid {
+        grid-template-columns: repeat(5, 1fr);
     }
 }

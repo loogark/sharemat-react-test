@@ -4,12 +4,11 @@ const BASE_URL = "https://rickandmortyapi.com/api";
 
 export async function fetchData<T>(
   endpoint: string,
-  queries: QueryParams = {},
-  page: number = 1
+  queries: QueryParams = {}
 ): Promise<any> {
   try {
     let url = `${BASE_URL}/${endpoint}`;
-    const allQueries = { ...queries, page };
+    const allQueries = { ...queries };
 
     // Convert queries object to URL search params
     const searchParams = new URLSearchParams();

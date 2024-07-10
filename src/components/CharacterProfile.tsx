@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Character } from "../types";
 import { fetchData } from "../utils/api";
 import "./CharacterProfile.css";
@@ -7,6 +7,9 @@ import "./CharacterProfile.css";
 export const CharacterProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [character, setCharacter] = useState<Character | null>(null);
+
+  const location = useLocation();
+  const page = location.state?.page || 1;
 
   useEffect(() => {
     const loadCharacter = async () => {
@@ -21,15 +24,13 @@ export const CharacterProfile: React.FC = () => {
     loadCharacter();
   }, [id]);
 
-  console.log(character, "character");
-
   if (!character) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className='character-profile-container'>
-      <Link className='go-back-button' to='/'>
+      <Link className='go-back-button' to={`/?page=${page}`}>
         Back to all characters
       </Link>
       <h1>{character.name}</h1>
