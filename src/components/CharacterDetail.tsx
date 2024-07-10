@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Character } from "../types";
 import { fetchData } from "../utils/api";
 import "./CharacterDetail.css";
@@ -21,14 +21,28 @@ export const CharacterDetail: React.FC = () => {
     loadCharacter();
   }, [id]);
 
+  console.log(character, "character");
+
   if (!character) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className='character-details'>
+      <Link className='go-back-button' to='/'>
+        Back to all characters
+      </Link>
       <h1>{character.name}</h1>
-      {/* Display other character details here */}
+      <div className='character-stats'>
+        <img src={character.image} alt={character.name} />
+        <div>
+          <p>Status: {character.status}</p>
+          <p>Species: {character.species}</p>
+          <p>Gender: {character.gender}</p>
+          <p>Origin: {character.origin.name}</p>
+          <p>No.of Episodes: {character.episode.length}</p>
+        </div>
+      </div>
     </div>
   );
 };
