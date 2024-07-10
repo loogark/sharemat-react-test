@@ -24,7 +24,12 @@ const Pagination: React.FC<PaginationProps> = ({ info, currentPage }) => {
   const prevPage = getPageFromUrl(info.prev);
 
   const handlePageChange = (page: number) => {
-    setSearchParams({ page: String(page) });
+    setSearchParams((prev) => {
+      const name = prev.get("name");
+      prev.set("page", String(page));
+      if (name !== null) prev.set("name", name);
+      return prev;
+    });
   };
 
   return (
