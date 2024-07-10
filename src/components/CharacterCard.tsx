@@ -16,7 +16,9 @@ const CharacterCard = ({ character }: Props) => {
         <div className='character-info'>
           <h2>{name}</h2>
           <p className='status'>
-            <span className={`status-icon ${status.toLowerCase()}`}></span>
+            <span
+              className={`character-status-icon ${status.toLowerCase()}`}
+            ></span>
             {status} - {species}
           </p>
           <p>Gender:</p>

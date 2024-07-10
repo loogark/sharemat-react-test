@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
-import { CharacterDetail } from "./components/CharacterDetail";
+import { CharacterProfile } from "./components/CharacterProfile";
 import { Characters } from "./components/Characters";
 
 export const router: ReturnType<typeof createBrowserRouter> =
@@ -15,7 +15,7 @@ export const router: ReturnType<typeof createBrowserRouter> =
         },
         {
           path: "/character/:id",
-          element: <CharacterDetail />,
+          element: <CharacterProfile />,
         },
       ],
     },

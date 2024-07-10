@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Character } from "../types";
 import { fetchData } from "../utils/api";
-import "./CharacterDetail.css";
+import "./CharacterProfile.css";
 
-export const CharacterDetail: React.FC = () => {
+export const CharacterProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [character, setCharacter] = useState<Character | null>(null);
 
@@ -28,15 +28,27 @@ export const CharacterDetail: React.FC = () => {
   }
 
   return (
-    <div className='character-details'>
+    <div className='character-profile-container'>
       <Link className='go-back-button' to='/'>
         Back to all characters
       </Link>
       <h1>{character.name}</h1>
-      <div className='character-stats'>
-        <img src={character.image} alt={character.name} />
-        <div>
-          <p>Status: {character.status}</p>
+      <div className='character-wall'>
+        <div className='image-container'>
+          <img
+            className='profile-image'
+            src={character.image}
+            alt={character.name}
+          />
+        </div>
+        <div className='character-stats'>
+          <div className='character-status'>
+            <p>Status: {character.status}</p>
+            <div
+              className={`character-status-icon ${character.status.toLowerCase()}`}
+            ></div>
+          </div>
+
           <p>Species: {character.species}</p>
           <p>Gender: {character.gender}</p>
           <p>Origin: {character.origin.name}</p>
