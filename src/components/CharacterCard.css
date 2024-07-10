@@ -1,0 +1,70 @@
+.character-link {
+    text-decoration: none;
+}
+
+.character-card {
+    width: 300px;
+    background-color: #3c3e44;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: start;
+    transition: all 0.3s ease;
+}
+
+.character-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.character-info {
+    padding: 15px;
+    color: #ffffff;
+}
+
+h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.character-card:hover h2 {
+    text-decoration: underline;
+}
+
+p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+}
+
+.status-icon {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.alive {
+    background-color: #55cc44;
+}
+
+.dead {
+    background-color: #d63d2e;
+}
+
+.unknown {
+    background-color: #9e9e9e;
+}
+
+.location,
+.origin,
+.gender {
+    color: #9e9e9e;
+}

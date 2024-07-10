@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: inherit;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-image {
+    height: fit-content;
+    width: fit-content;
+}
+
+.navbar-title h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
