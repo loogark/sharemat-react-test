@@ -31,7 +31,7 @@ To create a production build: pnpm run build
 The built files will be in the `dist` directory.
 
 ## Project Structure
-
+```
 📦
 ├─ .eslintrc.cjs
 ├─ .gitignore
@@ -109,7 +109,7 @@ The built files will be in the `dist` directory.
 ├─ tsconfig.json
 ├─ tsconfig.node.json
 └─ vite.config.ts
-
+```
 
 ## Features
 
