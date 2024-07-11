@@ -9,7 +9,7 @@ import { useFetch } from "../useFetch";
  * @returns An object containing the character profile data, loading state, error state, and back link parameters.
  */
 
-interface UseCharacterProfileResult {
+export interface UseCharacterProfileResult {
   character: Character | null;
   isLoading: boolean;
   error: Error | null;
@@ -41,7 +41,7 @@ export const useCharacterProfile = (): UseCharacterProfileResult => {
     loadCharacter();
   }, [id, fetchData]);
 
-  const searchParams = createSearchParams({ page, name });
+  const searchParams = createSearchParams({ page, name }); // Create search params for back link from state
 
   const backLinkParams = searchParams.toString()
     ? `?${searchParams.toString()}`

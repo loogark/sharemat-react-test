@@ -4,7 +4,14 @@ import { useCharacterProfile } from "../../hooks";
 import { Character } from "../../types";
 import { CharacterProfile } from "./CharacterProfile";
 
-jest.mock("../../hooks/api/useCharacterProfile");
+jest.mock("../../hooks/api/useCharacterProfile", () => ({
+  useCharacterProfile: jest.fn(() => ({
+    character: null,
+    isLoading: false,
+    error: null,
+    backLinkParams: "",
+  })),
+}));
 
 const mockUseCharacterProfile = useCharacterProfile as jest.MockedFunction<
   typeof useCharacterProfile

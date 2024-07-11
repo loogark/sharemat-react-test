@@ -14,12 +14,14 @@ export const SearchBar = () => {
     const trimmedQuery = debouncedQuery.trim();
 
     if (trimmedQuery !== initialQuery && trimmedQuery !== "") {
+      // Update search params: remove 'page' and set 'name' if query changed and not empty
       setSearchParams((prev) => {
         prev.delete("page");
         prev.set("name", trimmedQuery);
         return prev;
       });
     } else if (trimmedQuery === "" && initialQuery !== "") {
+      // Reset to page 1 and remove 'name' if query cleared
       setSearchParams((prev) => {
         prev.set("page", String(1));
         prev.delete("name");

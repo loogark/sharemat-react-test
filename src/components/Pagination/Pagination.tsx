@@ -26,6 +26,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const prevPage = getPageFromUrl(info.prev);
 
   const handlePageChange = (page: number) => {
+    // Update search params: set old 'page' and 'name' if only it was not null
     setSearchParams((prev) => {
       const name = prev.get("name");
       prev.set("page", String(page));

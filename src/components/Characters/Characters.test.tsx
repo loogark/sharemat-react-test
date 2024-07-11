@@ -1,98 +1,121 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { SearchBar } from "../SearchBar";
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import { UseCharacters } from "../../hooks";
+import { UseCharactersResult } from "../../hooks/api/useCharacters";
+import { Character } from "../../types";
+import { Characters } from "./Characters";
 
-jest.mock("../../hooks/useDebounce.ts", () => ({
+// Mock UseCharacters hook and debounce hook
+jest.mock("../../hooks", () => ({
+  UseCharacters: jest.fn(),
   useDebounce: jest.fn((value) => [value]),
 }));
 
-const mockSetSearchParams = jest.fn();
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useSearchParams: () => [
-    {
-      get: jest.fn((param) => {
-        if (param === "name") return "initialQuery";
-        return null;
-      }),
-    },
-    mockSetSearchParams,
-  ],
-}));
+const mockUseCharacters = UseCharacters as jest.MockedFunction<
+  typeof UseCharacters
+>;
 
-describe("SearchBar", () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
-    mockSetSearchParams.mockClear();
-  });
+describe("Characters", () => {
+  it("should renders loading spinner when isLoading is true", () => {
+    mockUseCharacters.mockReturnValue({
+      isLoading: true,
+      characters: null,
+      info: null,
+      error: null,
+      currentPage: 1,
+    } as UseCharactersResult);
 
-  afterEach(() => {
-    jest.useRealTimers();
-  });
-
-  const renderWithRouter = (initialEntries = ["/"], route = "/") => {
     render(
-      <MemoryRouter initialEntries={initialEntries}>
-        <Routes>
-          <Route path={route} element={<SearchBar />} />
-        </Routes>
+      <MemoryRouter>
+        <Characters />
       </MemoryRouter>
     );
-  };
+    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
+  });
 
-  it("should render search input", () => {
-    renderWithRouter();
+  it("should renders NotFound when there is an error", () => {
+    mockUseCharacters.mockReturnValue({
+      isLoading: false,
+      characters: null,
+      info: null,
+      error: new Error("Test error"),
+      currentPage: 1,
+    } as UseCharactersResult);
+
+    render(
+      <MemoryRouter>
+        <Characters />
+      </MemoryRouter>
+    );
+    expect(screen.getByText(`No Character Found`)).toBeInTheDocument();
+  });
+
+  it("should renders character cards and pagination when data is loaded", () => {
+    const mockCharacters: Character[] = [
+      {
+        id: 1,
+        name: "Rick",
+        status: "Alive",
+        species: "Human",
+        type: "",
+        gender: "Male",
+        origin: { name: "Earth", url: "" },
+        location: { name: "Earth", url: "" },
+        image: "rick.jpg",
+        episode: [""],
+        url: "",
+        created: "",
+      },
+      {
+        id: 2,
+        name: "Morty",
+        status: "Alive",
+        species: "Human",
+        type: "",
+        gender: "Male",
+        origin: { name: "Earth", url: "" },
+        location: { name: "Earth", url: "" },
+        image: "morty.jpg",
+        episode: [""],
+        url: "",
+        created: "",
+      },
+    ];
+
+    mockUseCharacters.mockReturnValue({
+      isLoading: false,
+      characters: mockCharacters,
+      info: { pages: 2, count: 2, next: null, prev: null },
+      error: null,
+      currentPage: 1,
+    } as UseCharactersResult);
+
+    render(
+      <MemoryRouter>
+        <Characters />
+      </MemoryRouter>
+    );
+    expect(screen.getByText("Rick")).toBeInTheDocument();
+    expect(screen.getByText("Morty")).toBeInTheDocument();
+    expect(screen.getByText("Page 1 of 2")).toBeInTheDocument();
+  });
+
+  it("should always renders SearchBar", () => {
+    mockUseCharacters.mockReturnValue({
+      isLoading: false,
+      characters: null,
+      info: null,
+      error: null,
+      currentPage: 1,
+    } as UseCharactersResult);
+
+    render(
+      <MemoryRouter>
+        <Characters />
+      </MemoryRouter>
+    );
     expect(
       screen.getByPlaceholderText("Search characters...")
     ).toBeInTheDocument();
-  });
-
-  it("should update query state on input change", () => {
-    renderWithRouter();
-    const input = screen.getByPlaceholderText("Search characters...");
-    fireEvent.change(input, { target: { value: "Rick" } });
-    expect(input).toHaveValue("Rick");
-  });
-
-  it("should update search params after debounce", () => {
-    renderWithRouter();
-    const input = screen.getByPlaceholderText("Search characters...");
-
-    fireEvent.change(input, { target: { value: "Morty" } });
-
-    act(() => {
-      jest.advanceTimersByTime(300);
-    });
-
-    expect(mockSetSearchParams).toHaveBeenCalledWith(expect.any(Function));
-    const setParamsFn = mockSetSearchParams.mock.calls[0][0];
-    const mockPrev = {
-      delete: jest.fn(),
-      set: jest.fn(),
-    };
-    setParamsFn(mockPrev);
-    expect(mockPrev.delete).toHaveBeenCalledWith("page");
-    expect(mockPrev.set).toHaveBeenCalledWith("name", "Morty");
-  });
-
-  it("should remove search query when input is cleared", () => {
-    renderWithRouter(["/?name=initialQuery"]);
-    const input = screen.getByPlaceholderText("Search characters...");
-
-    fireEvent.change(input, { target: { value: "" } });
-
-    act(() => {
-      jest.advanceTimersByTime(300);
-    });
-
-    expect(mockSetSearchParams).toHaveBeenCalledWith(expect.any(Function));
-    const setParamsFn = mockSetSearchParams.mock.calls[0][0];
-    const mockPrev = {
-      delete: jest.fn(),
-      set: jest.fn(),
-    };
-    setParamsFn(mockPrev);
-    expect(mockPrev.set).toHaveBeenCalledWith("page", "1");
-    expect(mockPrev.delete).toHaveBeenCalledWith("name");
   });
 });

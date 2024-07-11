@@ -17,7 +17,7 @@ export const CharacterCard = ({ character }: Props) => {
     <Link
       className='character-link'
       to={`/character/${id}`}
-      state={{ page, name: nameQuery }}
+      state={{ page, name: nameQuery }} // Pass the current page and name query as state
       key={character.id}
     >
       <article className='character-card'>

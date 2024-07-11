@@ -3,6 +3,8 @@ import { MemoryRouter } from "react-router-dom";
 import { Character } from "../../types";
 import CharacterCard from "./CharacterCard";
 
+// Mock react-router-dom's useSearchParams hook
+// Returns fixed search params: page="1", name="Rick"
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useSearchParams: () => [
@@ -43,6 +45,7 @@ const mockCharacter: Character = {
 describe("CharacterCard", () => {
   it("should renders character information correctly", () => {
     render(
+      // Wrap CharacterCard in MemoryRouter to simulate routing context for testing
       <MemoryRouter>
         <CharacterCard character={mockCharacter} />
       </MemoryRouter>

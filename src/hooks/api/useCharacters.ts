@@ -36,7 +36,6 @@ export const UseCharacters = (): UseCharactersResult => {
         if (currentSearch.trim() !== "") {
           params.name = currentSearch;
         }
-
         const characterData = await fetchData("character", params);
         setCharacters(characterData.results);
         setInfo(characterData.info);
