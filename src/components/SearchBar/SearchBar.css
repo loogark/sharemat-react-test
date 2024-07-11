@@ -2,8 +2,8 @@
     display: flex;
     max-width: 500px;
     margin: 20px;
-    border: 1px solid #333;
-    border-radius: 6px;
+    border: var(--border-light);
+    border-radius: var(--border-radius-md);
     overflow: hidden;
 }
 
@@ -11,7 +11,7 @@
     flex-grow: 1;
     padding: 12px 20px;
     font-size: 16px;
-    color: #333;
+    color: var(--card-bg);
     border: none;
     outline: none;
     background-color: transparent;

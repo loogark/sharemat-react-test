@@ -10,25 +10,25 @@
     align-items: flex-start;
     margin-left: auto;
     margin-right: auto;
-    color: black;
+    color: var(--black-text);
 }
 
 .go-back-button {
     padding: 10px;
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
     text-decoration: none;
-    color: #3c3e44;
+    color: var(--grey-text);
     transition: all 0.2s ease;
     text-decoration: underline;
 }
 
 .go-back-button:hover {
-    color: black;
+    color: var(--black-text);
 }
 
 .pagination-button:hover {
-    background: #3c3e44;
-    color: white;
+    background: var(--card-bg);
+    color: var(--white-text);
 }
 
 .character-profile-container h1 {
@@ -45,7 +45,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: var(--border-radius-lg);
 }
 
 .character-wall {
@@ -70,9 +70,14 @@
     font-size: 24px;
 }
 
+.character-stats p {
+    color: var(--black-text);
+}
+
 .character-status {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
+    color: var(--black-text);
 }

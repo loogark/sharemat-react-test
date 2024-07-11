@@ -3,7 +3,7 @@
   height: 100vh;
   margin: 0;
   padding: 0;
-  color: #888;
+  color: var(--grey-text);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -12,18 +12,18 @@
 .character-status-icon {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: var(--border-radius-full);
   margin-right: 5px;
 }
 
 .alive {
-  background-color: #55cc44;
+  background-color: var(--status-green);
 }
 
 .dead {
-  background-color: #d63d2e;
+  background-color: var(--status-red);
 }
 
 .unknown {
-  background-color: #9e9e9e;
+  background-color: var(--status-unknown);
 }

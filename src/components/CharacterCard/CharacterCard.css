@@ -4,11 +4,11 @@
 
 .character-card {
     width: 260px;
-    background-color: #3c3e44;
-    border-radius: 10px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
     overflow: hidden;
     margin: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--card-shadow);
     text-align: start;
     transition: all 0.3s ease;
 }
@@ -21,7 +21,7 @@
 
 .character-info {
     padding: 15px;
-    color: #ffffff;
+    color: var(--white-text);
 }
 
 h2 {
@@ -40,18 +40,20 @@ h2 {
 p {
     margin: 5px 0;
     font-size: 0.9em;
+    color: var(--grey-text);
 }
 
 .status {
     display: flex;
     align-items: center;
+    color: var(--white-text);
 }
 
 
 .location,
 .origin,
 .gender {
-    color: #9e9e9e;
+    color: var(--white-text);
 }
 
 
