@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { Character } from "../../types";
 import { createSearchParams } from "../../utils";
 import { useFetch } from "../useFetch";
-
-/**
- * Custom hook for fetching and managing character profile data.
- * @returns An object containing the character profile data, loading state, error state, and back link parameters.
- */
 
 export interface UseCharacterProfileResult {
   character: Character | null;
@@ -22,8 +17,7 @@ export const useCharacterProfile = (): UseCharacterProfileResult => {
   const { fetchData, isLoading, error } = useFetch<Character>();
 
   const location = useLocation();
-  const page = location.state?.page;
-  const name = location.state?.name;
+  const { page, name, status, gender } = location.state || {};
 
   useEffect(() => {
     const loadCharacter = async () => {
@@ -41,11 +35,10 @@ export const useCharacterProfile = (): UseCharacterProfileResult => {
     loadCharacter();
   }, [id, fetchData]);
 
-  const searchParams = createSearchParams({ page, name }); // Create search params for back link from state
-
-  const backLinkParams = searchParams.toString()
-    ? `?${searchParams.toString()}`
-    : "";
+  const backLinkParams = useMemo(() => {
+    const searchParams = createSearchParams({ page, name, status, gender });
+    return searchParams.toString() ? `?${searchParams.toString()}` : "";
+  }, [page, name, status, gender]);
 
   return { character, isLoading, error, backLinkParams };
 };

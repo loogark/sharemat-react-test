@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ApiResponse, Character } from "../../types";
 import { useFetch } from "../useFetch";
@@ -27,16 +27,26 @@ export const UseCharacters = (): UseCharactersResult => {
 
   const currentPage = Number(searchParams.get("page")) || 1;
   const currentSearch = searchParams.get("name") || "";
+  const currentStatus = searchParams.get("status") || "";
+  const currentGender = searchParams.get("gender") || "";
+
+  const queryParams = useMemo(() => {
+    const params: Record<string, string | number> = {
+      page: Number(searchParams.get("page")) || 1,
+    };
+
+    ["name", "status", "gender"].forEach((param) => {
+      const value = searchParams.get(param);
+      if (value?.trim()) params[param] = value;
+    });
+
+    return params;
+  }, [searchParams]);
 
   useEffect(() => {
-    const fetchCharacterData = async (pageNumber: number) => {
+    const fetchCharacterData = async () => {
       try {
-        const params: { page: number; name?: string } = { page: pageNumber };
-
-        if (currentSearch.trim() !== "") {
-          params.name = currentSearch;
-        }
-        const characterData = await fetchData("character", params);
+        const characterData = await fetchData("character", queryParams);
         setCharacters(characterData.results);
         setInfo(characterData.info);
       } catch (error) {
@@ -46,8 +56,8 @@ export const UseCharacters = (): UseCharactersResult => {
       }
     };
 
-    fetchCharacterData(currentPage);
-  }, [currentPage, currentSearch, fetchData]);
+    fetchCharacterData();
+  }, [currentPage, currentSearch, fetchData, currentStatus, currentGender]);
 
   return { characters, info, isLoading, error, currentPage };
 };

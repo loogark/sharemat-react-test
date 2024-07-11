@@ -18,3 +18,21 @@ export const createSearchParams = (params: {
 
   return searchParams;
 };
+
+/**
+ * Converts URLSearchParams to an object.
+ * @param searchParams - The URLSearchParams object to convert.
+ * @returns An object representing the key-value pairs of the URLSearchParams.
+ */
+export const searchParamsToObject = (searchParams: {
+  get: (param: string) => string | null;
+}): Record<string, string> => {
+  const result: Record<string, string> = {};
+  ["page", "name", "status", "gender"].forEach((param) => {
+    const value = searchParams.get(param);
+    if (value) {
+      result[param] = value;
+    }
+  });
+  return result;
+};

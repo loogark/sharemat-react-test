@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Character } from "../../types";
+import { searchParamsToObject } from "../../utils";
 import "./CharacterCard.css";
 
 interface Props {
@@ -10,14 +12,15 @@ export const CharacterCard = ({ character }: Props) => {
   const { id, name, status, gender, species, location, image, origin } =
     character;
   const [searchParams] = useSearchParams();
-  const page = searchParams.get("page");
-  const nameQuery = searchParams.get("name");
-
+  const allParams = useMemo(
+    () => searchParamsToObject(searchParams),
+    [searchParams]
+  );
   return (
     <Link
       className='character-link'
       to={`/character/${id}`}
-      state={{ page, name: nameQuery }} // Pass the current page and name query as state
+      state={{ ...allParams }} // Pass the current page and name query as state
       key={character.id}
     >
       <article className='character-card'>
