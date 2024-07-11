@@ -1,7 +1,7 @@
 .search-bar {
     display: flex;
     max-width: 500px;
-    margin: 20px auto;
+    margin: 20px;
     border: 1px solid #333;
     border-radius: 6px;
     overflow: hidden;
@@ -15,4 +15,11 @@
     border: none;
     outline: none;
     background-color: transparent;
+}
+
+
+@media screen and (min-width: 600px) {
+    .search-bar {
+        margin: 20px auto;
+    }
 }

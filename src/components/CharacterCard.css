@@ -3,7 +3,7 @@
 }
 
 .character-card {
-    width: 300px;
+    width: 260px;
     background-color: #3c3e44;
     border-radius: 10px;
     overflow: hidden;
@@ -52,4 +52,11 @@ p {
 .origin,
 .gender {
     color: #9e9e9e;
+}
+
+
+@media screen and (min-width: 600px) {
+    .character-card {
+        width: 300px;
+    }
 }
