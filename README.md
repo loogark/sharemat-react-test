@@ -66,6 +66,9 @@ This project uses the [Rick and Morty API](https://rickandmortyapi.com/api). Ple
  - add a more filter options then search to make the list interactive.
  - Could have added more endpoints in details page to give more info.
 
+ # Live Link
+  [https://sharemat-react-test.vercel.app/](https://sharemat-react-test.vercel.app/)
+
 ## License
 
 This project is licensed under the MIT License.
