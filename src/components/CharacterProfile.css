@@ -15,10 +15,20 @@
 
 .go-back-button {
     padding: 10px;
-    border: 1px solid #3c3e44;
     border-radius: 4px;
     text-decoration: none;
+    color: #3c3e44;
+    transition: all 0.2s ease;
+    text-decoration: underline;
+}
+
+.go-back-button:hover {
     color: black;
+}
+
+.pagination-button:hover {
+    background: #3c3e44;
+    color: white;
 }
 
 .character-profile-container h1 {

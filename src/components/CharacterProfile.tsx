@@ -2,14 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useCharacterProfile } from "../hooks/api/useCharacterProfile";
 import "./CharacterProfile.css";
+import { CustomError } from "./CustomError";
+import LoadingSpinner from "./LoadingSpinner";
 
 export const CharacterProfile: React.FC = () => {
-  const { character, isLoading, backLinkParams } = useCharacterProfile();
-  console.log(character, "character");
+  const { character, isLoading, backLinkParams, error } = useCharacterProfile();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingSpinner />;
 
-  if (!character) return <div>Character not found</div>;
+  if (error || !character) return <CustomError message={error?.message} />;
 
   return (
     <div className='character-profile-container'>

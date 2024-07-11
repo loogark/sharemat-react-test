@@ -21,8 +21,8 @@ export function useFetch<T>(): UseFetchResult<T> {
       endpoint: string,
       queries: QueryParams = {}
     ): Promise<ApiResponse<T>> => {
-      setIsLoading(true);
       setError(null);
+      setIsLoading(true);
 
       try {
         let url = `${BASE_URL}/${endpoint}`;

@@ -25,10 +25,6 @@
     color: white;
 }
 
-.pagination-button:hover {
-    background: #3c3e44;
-    color: white;
-}
 
 .pagination-button:disabled {
     background: #e0e0e0;

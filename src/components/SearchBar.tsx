@@ -21,6 +21,7 @@ const SearchBar = () => {
       });
     } else if (trimmedQuery === "" && initialQuery !== "") {
       setSearchParams((prev) => {
+        prev.set("page", String(1));
         prev.delete("name");
         return prev;
       });

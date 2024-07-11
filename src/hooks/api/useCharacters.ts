@@ -36,6 +36,8 @@ export const UseCharacters = (): UseCharactersResult => {
         setCharacters(characterData.results);
         setInfo(characterData.info);
       } catch (error) {
+        setCharacters(null);
+        setInfo(null);
         console.error("Error fetching character data:", error);
       }
     };

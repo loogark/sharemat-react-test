@@ -27,6 +27,7 @@ export const useCharacterProfile = (): UseCharacterProfileResult => {
         )) as unknown as Character;
         setCharacter(data);
       } catch (error) {
+        setCharacter(null);
         console.error("Failed to fetch character:", error);
       }
     };
