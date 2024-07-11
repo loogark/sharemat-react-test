@@ -1,10 +1,10 @@
-import { UseCharacters } from "../hooks/api/useCharacters";
-import CharacterCard from "./CharacterCard";
+import { UseCharacters } from "../../hooks";
+import { CharacterCard } from "../CharacterCard";
+import { NotFound } from "../FillerComponent/NotFound";
+import { LoadingSpinner } from "../LoadingSpinner";
+import { Pagination } from "../Pagination";
+import { SearchBar } from "../SearchBar";
 import "./Characters.css";
-import LoadingSpinner from "./LoadingSpinner";
-import { NotFound } from "./NotFound";
-import Pagination from "./Pagination";
-import SearchBar from "./SearchBar";
 
 export const Characters = () => {
   const { characters, info, currentPage, isLoading, error } = UseCharacters();

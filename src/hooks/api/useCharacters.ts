@@ -3,7 +3,12 @@ import { useSearchParams } from "react-router-dom";
 import { ApiResponse, Character } from "../../types";
 import { useFetch } from "../useFetch";
 
-interface UseCharactersResult {
+/**
+ * Custom hook for fetching and managing character data.
+ * @returns An object containing characters, info, isLoading, error, and currentPage.
+ */
+
+export interface UseCharactersResult {
   characters: Character[] | null;
   info: ApiResponse<Character[]>["info"] | null;
   isLoading: boolean;

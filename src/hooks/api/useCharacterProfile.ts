@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
-import { createSearchParams, useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Character } from "../../types";
+import { createSearchParams } from "../../utils";
 import { useFetch } from "../useFetch";
+
+/**
+ * Custom hook for fetching and managing character profile data.
+ * @returns An object containing the character profile data, loading state, error state, and back link parameters.
+ */
 
 interface UseCharacterProfileResult {
   character: Character | null;

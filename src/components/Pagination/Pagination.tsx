@@ -1,6 +1,6 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import { ApiResponse, Character } from "../types";
+import { ApiResponse, Character } from "../../types";
 import "./Pagination.css";
 
 interface PaginationProps {
@@ -8,7 +8,10 @@ interface PaginationProps {
   currentPage: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ info, currentPage }) => {
+export const Pagination: React.FC<PaginationProps> = ({
+  info,
+  currentPage,
+}) => {
   const [_, setSearchParams] = useSearchParams();
 
   const getPageFromUrl = (url: string | null): number => {
@@ -68,5 +71,3 @@ const Pagination: React.FC<PaginationProps> = ({ info, currentPage }) => {
     </div>
   );
 };
-
-export default Pagination;

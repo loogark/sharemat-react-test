@@ -2,6 +2,13 @@ import { useCallback, useState } from "react";
 import { ApiResponse, QueryParams } from "../types";
 import { createSearchParams } from "../utils";
 
+/**
+ * Custom hook for fetching data from an API.
+ *
+ * @returns An object containing the `fetchData` function, `isLoading` flag, and `error` object.
+ * @template T - The type of data returned by the API.
+ */
+
 const BASE_URL = "https://rickandmortyapi.com/api";
 
 interface UseFetchResult<T> {

@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "./Layout";
-import { CharacterProfile } from "./components/CharacterProfile";
-import { Characters } from "./components/Characters";
+import { CharacterProfile, Characters } from "./components";
+import { Layout } from "./Layout";
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([

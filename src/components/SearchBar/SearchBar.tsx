@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useDebounce } from "../hooks/useDebounce";
+import { useDebounce } from "../../hooks";
 import "./SearchBar.css";
 
-const SearchBar = () => {
+export const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialQuery = searchParams.get("name") || "";
 
@@ -40,5 +40,3 @@ const SearchBar = () => {
     </div>
   );
 };
-
-export default SearchBar;

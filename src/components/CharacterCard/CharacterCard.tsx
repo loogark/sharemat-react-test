@@ -1,12 +1,12 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { Character } from "../types";
+import { Character } from "../../types";
 import "./CharacterCard.css";
 
 interface Props {
   character: Character;
 }
 
-const CharacterCard = ({ character }: Props) => {
+export const CharacterCard = ({ character }: Props) => {
   const { id, name, status, gender, species, location, image, origin } =
     character;
   const [searchParams] = useSearchParams();

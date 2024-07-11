@@ -1,4 +1,4 @@
-import { Logo } from "../assets/Logo";
+import { Logo } from "../../assets/Logo";
 import "./Navbar.css";
 
 export const Navbar = () => {
