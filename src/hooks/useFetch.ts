@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { ApiResponse, QueryParams } from "../types";
+import { createSearchParams } from "../utils";
 
 const BASE_URL = "https://rickandmortyapi.com/api";
 
@@ -28,10 +29,7 @@ export function useFetch<T>(): UseFetchResult<T> {
         let url = `${BASE_URL}/${endpoint}`;
         const allQueries = { ...queries };
 
-        const searchParams = new URLSearchParams();
-        Object.entries(allQueries).forEach(([key, value]) => {
-          searchParams.append(key, value.toString());
-        });
+        const searchParams = createSearchParams(allQueries);
 
         url += `?${searchParams.toString()}`;
 

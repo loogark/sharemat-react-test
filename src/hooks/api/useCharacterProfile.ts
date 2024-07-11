@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { createSearchParams, useLocation, useParams } from "react-router-dom";
 import { Character } from "../../types";
 import { useFetch } from "../useFetch";
 
@@ -35,12 +35,7 @@ export const useCharacterProfile = (): UseCharacterProfileResult => {
     loadCharacter();
   }, [id, fetchData]);
 
-  const searchParams = new URLSearchParams(
-    Object.entries({ page, name })
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .filter(([_, value]) => value !== null && value !== "")
-      .map(([key, value]) => [key, key === "name" ? value.trim() : value])
-  );
+  const searchParams = createSearchParams({ page, name });
 
   const backLinkParams = searchParams.toString()
     ? `?${searchParams.toString()}`
