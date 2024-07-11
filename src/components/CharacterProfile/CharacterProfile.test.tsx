@@ -113,6 +113,6 @@ describe("CharacterProfile", () => {
     );
 
     const backLink = screen.getByText("Back to all characters");
-    expect(backLink).toHaveAttribute("href", "/?page=2");
+    expect(backLink).toHaveAttribute("href", "/characters?page=2");
   });
 });

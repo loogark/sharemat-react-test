@@ -11,7 +11,7 @@ export const CharacterProfile: React.FC = () => {
 
   return (
     <div className='character-profile-container'>
-      <Link className='go-back-button' to={`/${backLinkParams}`}>
+      <Link className='go-back-button' to={`/characters${backLinkParams}`}>
         Back to all characters
       </Link>
       {error && <CustomError message={error.message} />}
