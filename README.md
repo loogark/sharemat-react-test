@@ -31,17 +31,85 @@ To create a production build: pnpm run build
 The built files will be in the `dist` directory.
 
 ## Project Structure
-src/
-├── components/
-├── hooks/
-├── types/
-├── utils/
-├── assets/
-├── layout/
-├── App.tsx
-└── main.tsx
-└── router.tsx
-└── setupTests.ts
+
+📦
+├─ .eslintrc.cjs
+├─ .gitignore
+├─ README.md
+├─ index.html
+├─ jest.config.ts
+├─ package.json
+├─ pnpm-lock.yaml
+├─ public
+│  └─ logo.svg
+├─ src
+│  ├─ App.css
+│  ├─ App.tsx
+│  ├─ Layout
+│  │  ├─ Layout.tsx
+│  │  └─ index.ts
+│  ├─ assets
+│  │  └─ Logo.tsx
+│  ├─ components
+│  │  ├─ CharacterCard
+│  │  │  ├─ CharacterCard.css
+│  │  │  ├─ CharacterCard.test.tsx
+│  │  │  ├─ CharacterCard.tsx
+│  │  │  └─ index.ts
+│  │  ├─ CharacterProfile
+│  │  │  ├─ CharacterProfile.css
+│  │  │  ├─ CharacterProfile.test.tsx
+│  │  │  ├─ CharacterProfile.tsx
+│  │  │  └─ index.ts
+│  │  ├─ Characters
+│  │  │  ├─ Characters.css
+│  │  │  ├─ Characters.test.tsx
+│  │  │  ├─ Characters.tsx
+│  │  │  └─ index.ts
+│  │  ├─ FillerComponent
+│  │  │  ├─ CustomError.tsx
+│  │  │  ├─ NotFound.tsx
+│  │  │  └─ index.ts
+│  │  ├─ LoadingSpinner
+│  │  │  ├─ LoadingSpinner.css
+│  │  │  ├─ LoadingSpinner.tsx
+│  │  │  └─ index.ts
+│  │  ├─ Navbar
+│  │  │  ├─ Navbar.css
+│  │  │  ├─ Navbar.tsx
+│  │  │  └─ index.ts
+│  │  ├─ Pagination
+│  │  │  ├─ Pagination.css
+│  │  │  ├─ Pagination.tsx
+│  │  │  └─ index.ts
+│  │  ├─ SearchBar
+│  │  │  ├─ SearchBar.css
+│  │  │  ├─ SearchBar.test.tsx
+│  │  │  ├─ SearchBar.tsx
+│  │  │  └─ index.ts
+│  │  └─ index.ts
+│  ├─ hooks
+│  │  ├─ api
+│  │  │  ├─ index.ts
+│  │  │  ├─ useCharacterProfile.ts
+│  │  │  └─ useCharacters.ts
+│  │  ├─ index.ts
+│  │  ├─ useDebounce.ts
+│  │  └─ useFetch.ts
+│  ├─ index.css
+│  ├─ main.tsx
+│  ├─ setupTests.ts
+│  ├─ types
+│  │  └─ index.ts
+│  ├─ utils
+│  │  └─ index.ts
+│  └─ vite-env.d.ts
+├─ tsconfig.app.json
+├─ tsconfig.jest.json
+├─ tsconfig.json
+├─ tsconfig.node.json
+└─ vite.config.ts
+
 
 ## Features
 
